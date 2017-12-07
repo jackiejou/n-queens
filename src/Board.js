@@ -79,12 +79,22 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // get all elements at rowIndex and sum all elements and check if sum is greateer than one
+      return this.get(rowIndex).reduce((sum, num) => sum + num) > 1;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      // get size of board
+      // loop through each rows and call hasRowConflict
+        // if any is true, return true,
+      var size = this.get('n'); // get size of board
+      for (var i = 0; i < size; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -94,12 +104,28 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      //create array to store column values
+      let column = [];
+      //get size value
+      let size = this.get('n'); 
+      //loop through each row to get colIndex value
+      for (var i = 0; i < size; i++) {
+        //push that value into array
+        column.push(this.get(i)[colIndex]);
+      }
+      //reduce column array to get sum
+      return column.reduce((sum, num) => sum + num) > 1;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var size = this.get('n'); // get size of board
+      for (var i = 0; i < size; i++) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -109,12 +135,37 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //create empty array to store diagonal values
+      let diag = [];
+      //set variable for size
+      let size = this.get('n');
+      //loop through each row
+      for (var i = 0; i < size; i++) { //row number //
+        //loop through each value in column number
+        for (var j = 0; j < size; j++) { //column number //
+          //compare column and row coordinates
+          if ((j - i) === majorDiagonalColumnIndexAtFirstRow) {
+          //push coordinates that match majorDiagonalColumnIndexAtFirstRow
+            diag.push(this.get(i)[j]); //i = which row v // j = which column =>
+          }
+        }
+      }
+      //reduce to find sum of array > 1 ?
+      return diag.reduce((sum, num) => sum + num) > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
-    hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+    hasAnyMajorDiagonalConflicts: function() { //-(n - 2)// colIndex - rowIndex, -2 to cancel out corners
+      //get size
+      let size = this.get('n');
+      //loop through each diagonal
+      for (var i = 2 - size; i < size - 1; i++) {
+        //run hasMajorDiagonalConflictAt on each value (if)
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
