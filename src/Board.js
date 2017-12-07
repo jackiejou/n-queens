@@ -136,7 +136,7 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       //create empty array to store diagonal values
-      let diag = [];
+      let majDiag = [];
       //set variable for size
       let size = this.get('n');
       //loop through each row
@@ -146,12 +146,12 @@
           //compare column and row coordinates
           if ((j - i) === majorDiagonalColumnIndexAtFirstRow) {
           //push coordinates that match majorDiagonalColumnIndexAtFirstRow
-            diag.push(this.get(i)[j]); //i = which row v // j = which column =>
+            majDiag.push(this.get(i)[j]); //i = which row v // j = which column =>
           }
         }
       }
       //reduce to find sum of array > 1 ?
-      return diag.reduce((sum, num) => sum + num) > 1;
+      return majDiag.reduce((sum, num) => sum + num) > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -175,12 +175,37 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      //create empty array to store diagonal values
+      let minDiag = [];
+      //set variable for size
+      let size = this.get('n');
+      //loop through each row
+      for (var i = 0; i < size; i++) { //row number //
+        //loop through each value in column number
+        for (var j = 0; j < size; j++) { //column number //
+          //compare column and row coordinates
+          if ((i + j) === minorDiagonalColumnIndexAtFirstRow) {
+          //push coordinates that match minorDiagonalColumnIndexAtFirstRow
+            minDiag.push(this.get(i)[j]); //i = which row v // j = which column =>
+          }
+        }
+      }
+      //reduce to find sum of array > 1 ?
+      return minDiag.reduce((sum, num) => sum + num) > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      //get size
+      let size = this.get('n');
+      //loop through each diagonal
+      for (var i = 1; i < size + 2; i++) { // end at size + 2 bc skip corner and count including size + 1
+        //run hasMinorDiagonalConflictAt on each value (if)
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
