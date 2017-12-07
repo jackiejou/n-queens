@@ -80,7 +80,9 @@
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
       // get all elements at rowIndex and sum all elements and check if sum is greateer than one
-      return this.get(rowIndex).reduce((sum, num) => sum + num) > 1;
+      return this.get(rowIndex).reduce((sum, num) => {
+        return sum + num;
+      }, 0) > 1;
     },
 
     // test if any rows on this board contain conflicts
@@ -151,7 +153,9 @@
         }
       }
       //reduce to find sum of array > 1 ?
-      return majDiag.reduce((sum, num) => sum + num) > 1;
+      return majDiag.reduce((sum, num) => {
+        return sum + num;
+      }, 0) > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -191,7 +195,9 @@
         }
       }
       //reduce to find sum of array > 1 ?
-      return minDiag.reduce((sum, num) => sum + num) > 1;
+      return minDiag.reduce((sum, num) => {
+        return sum + num;
+      }, 0) > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
