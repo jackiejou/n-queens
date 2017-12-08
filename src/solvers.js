@@ -86,7 +86,7 @@ window.findNQueensSolution = function(n) {
 window.countNQueensSolutions = function(n) {
   var board = new Board({n: n});
   var solutionCount = 0;
-  
+  debugger;
   recursion(0, n, board, 'hasAnyQueensConflicts', function () {
     solutionCount++;
   });

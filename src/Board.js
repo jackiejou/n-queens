@@ -205,7 +205,7 @@
       //get size
       let size = this.get('n');
       //loop through each diagonal
-      for (var i = 1; i < size + 2; i++) { // end at size + 2 bc skip corner and count including size + 1
+      for (var i = 0; i < 2 * size; i++) { // end at size * 2
         //run hasMinorDiagonalConflictAt on each value (if)
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
@@ -213,9 +213,6 @@
       }
       return false;
     }
-
-    /*--------------------  End of Helper Functions  ---------------------*/
-
 
   });
 
